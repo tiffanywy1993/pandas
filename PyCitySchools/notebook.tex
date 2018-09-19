@@ -1,0 +1,1026 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{PyCitySchools\_starter}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{PyCity Schools Analysis}\label{pycity-schools-analysis}
+
+\begin{itemize}
+\item
+  As a whole, schools with higher budgets, did not yield better test
+  results. By contrast, schools with higher spending per student
+  actually (\$645-675) underperformed compared to schools with smaller
+  budgets (\textless{}\$585 per student).
+\item
+  As a whole, smaller and medium sized schools dramatically
+  out-performed large sized schools on passing math performances
+  (89-91\% passing vs 67\%).
+\item ~
+  \subsection{As a whole, charter schools out-performed the public
+  district schools across all metrics. However, more analysis will be
+  required to glean if the effect is due to school practices or the fact
+  that charter schools tend to serve smaller student populations per
+  school.}\label{as-a-whole-charter-schools-out-performed-the-public-district-schools-across-all-metrics.-however-more-analysis-will-be-required-to-glean-if-the-effect-is-due-to-school-practices-or-the-fact-that-charter-schools-tend-to-serve-smaller-student-populations-per-school.}
+\end{itemize}
+
+    \subsubsection{Note}\label{note}
+
+\begin{itemize}
+\tightlist
+\item
+  Instructions have been included for each segment. You do not have to
+  follow them exactly, but they are included to help you think through
+  the steps.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Dependencies and Setup}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{c+c1}{\PYZsh{} File to Load (Remember to Change These)}
+        \PY{n}{school\PYZus{}data\PYZus{}to\PYZus{}load} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Resources/schools\PYZus{}complete.csv}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{student\PYZus{}data\PYZus{}to\PYZus{}load} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Resources/students\PYZus{}complete.csv}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{c+c1}{\PYZsh{} Read School and Student Data File and store into Pandas Data Frames}
+        \PY{n}{school\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{school\PYZus{}data\PYZus{}to\PYZus{}load}\PY{p}{)}
+        \PY{n}{student\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{student\PYZus{}data\PYZus{}to\PYZus{}load}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Combine the data into a single dataset}
+        \PY{n}{school\PYZus{}data\PYZus{}complete} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{student\PYZus{}data}\PY{p}{,} \PY{n}{school\PYZus{}data}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{school\PYZus{}name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{school\PYZus{}name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{District Summary}\label{district-summary}
+
+\begin{itemize}
+\item
+  Calculate the total number of schools
+\item
+  Calculate the total number of students
+\item
+  Calculate the total budget
+\item
+  Calculate the average math score
+\item
+  Calculate the average reading score
+\item
+  Calculate the overall passing rate (overall average score), i.e. (avg.
+  math score + avg. reading score)/2
+\item
+  Calculate the percentage of students with a passing math score (70 or
+  greater)
+\item
+  Calculate the percentage of students with a passing reading score (70
+  or greater)
+\item
+  Create a dataframe to hold the above results
+\item
+  Optional: give the displayed data cleaner formatting
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{numofschools}\PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+        \PY{n}{numofstudents}\PY{o}{=}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+        \PY{n}{totalbudget}\PY{o}{=}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+        \PY{n}{avgmath}\PY{o}{=}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{avgreading}\PY{o}{=}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{overall}\PY{o}{=}\PY{p}{(}\PY{n}{avgmath}\PY{o}{+}\PY{n}{avgreading}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+        \PY{n}{passmath}\PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{l+m+mi}{70}\PY{p}{]}
+        \PY{n}{passmath}\PY{o}{=} \PY{n}{passmath}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{numofstudents} \PY{o}{*}\PY{l+m+mi}{100}
+        
+        
+        \PY{n}{passreading}\PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{l+m+mi}{70}\PY{p}{]}
+        
+        \PY{n}{passreading}\PY{o}{=}\PY{n}{passreading}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{numofstudents} \PY{o}{*}\PY{l+m+mi}{100}
+        
+        
+        \PY{n}{summary\PYZus{}results} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Schools}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{numofschools}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Students}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{n}{numofstudents}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Budget}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{n}{totalbudget}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Math Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{n}{avgmath}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Reading Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{n}{avgreading}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{passmath}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing reading}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:}\PY{p}{[}\PY{n}{passreading}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f overall passing rate}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{n}{overall}\PY{p}{]}
+            
+        \PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{summary\PYZus{}results} \PY{o}{=} \PY{n}{summary\PYZus{}results}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Schools}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Students}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Math Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Reading Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f passing Math}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} 
+                                         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f passing reading}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f overall passing rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+        \PY{n}{summary\PYZus{}results}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}    Total Schools  Total Students  Total Budget  Average Math Score  \textbackslash{}
+        0             15           39170   82932329558           78.985371   
+        
+           Average Reading Score  \% of passing Math  \% of passing reading  \textbackslash{}
+        0               81.87784          72.392137             82.971662   
+        
+           \% of overall passing rate  
+        0                  80.431606  
+\end{Verbatim}
+            
+    \subsection{School Summary}\label{school-summary}
+
+    \begin{itemize}
+\item
+  Create an overview table that summarizes key metrics about each
+  school, including:
+\item
+  School Name
+\item
+  School Type
+\item
+  Total Students
+\item
+  Total School Budget
+\item
+  Per Student Budget
+\item
+  Average Math Score
+\item
+  Average Reading Score
+\item
+  \% Passing Math
+\item
+  \% Passing Reading
+\item
+  Overall Passing Rate (Average of the above two)
+\item
+  Create a dataframe to hold the above results
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{group\PYZus{}school} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{s\PYZus{}type} \PY{o}{=} \PY{n}{group\PYZus{}school}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+        \PY{n}{total\PYZus{}students} \PY{o}{=} \PY{n}{group\PYZus{}school}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+        \PY{n}{total\PYZus{}budget} \PY{o}{=}  \PY{n}{group\PYZus{}school}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+        \PY{n}{per\PYZus{}studentbudget} \PY{o}{=} \PY{n}{total\PYZus{}budget}\PY{o}{/}\PY{n}{total\PYZus{}students}
+        \PY{n}{avg\PYZus{}mathscore} \PY{o}{=} \PY{n}{group\PYZus{}school}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{avg\PYZus{}readingscore} \PY{o}{=} \PY{n}{group\PYZus{}school}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{math\PYZus{}reading\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{,}
+                                       \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{student\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{Math\PYZus{}students}\PY{o}{=} \PY{n}{math\PYZus{}reading\PYZus{}df}\PY{p}{[}\PY{n}{math\PYZus{}reading\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{70}\PY{p}{]} \PYZbs{}
+        \PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{student\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{Passing\PYZus{}math}\PY{o}{=}\PY{n}{Math\PYZus{}students}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{Passing\PYZus{}math}\PY{o}{=}\PY{n}{Passing\PYZus{}math}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{total\PYZus{}students}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{total\PYZus{}students}\PY{p}{)}
+        \PY{n}{result\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+        \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{Passing\PYZus{}math}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{total\PYZus{}students}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{100}
+        
+        
+        \PY{n}{reading\PYZus{}students}\PY{o}{=}\PY{n}{math\PYZus{}reading\PYZus{}df}\PY{p}{[}\PY{n}{math\PYZus{}reading\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{70}\PY{p}{]}\PYZbs{}
+        \PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{student\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{Passing\PYZus{}reading}\PY{o}{=}\PY{n}{reading\PYZus{}students}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{Passing\PYZus{}reading}\PY{o}{=}\PY{n}{Passing\PYZus{}reading}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{Passing\PYZus{}reading} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{total\PYZus{}students}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{l+m+mi}{100}
+        
+        \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Overall Passing Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}
+        \PY{n}{result\PYZus{}df}
+        
+        
+        
+        \PY{n}{summary\PYZus{}school\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{s\PYZus{}type}\PY{p}{)}
+        
+        \PY{n}{summary\PYZus{}school\PYZus{}df} \PY{o}{=} \PY{n}{summary\PYZus{}school\PYZus{}df}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{n}{total\PYZus{}students}\PY{p}{,}\PY{n}{total\PYZus{}budget}\PY{p}{,}\PY{n}{per\PYZus{}studentbudget}\PY{p}{,}\PY{n}{avg\PYZus{}mathscore}\PY{p}{,}\PY{n}{avg\PYZus{}readingscore}\PY{p}{,}
+                                \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Overall Passing Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{summary\PYZus{}school\PYZus{}df} \PY{o}{=} \PY{n}{summary\PYZus{}school\PYZus{}df}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                             \PY{l+m+mi}{0}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget per Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Math Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Reading Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{fix\PYZus{}st} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{n}{summary\PYZus{}school\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{summary\PYZus{}school\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{fix\PYZus{}st}
+        
+        \PY{n}{fix\PYZus{}sb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{n}{summary\PYZus{}school\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{summary\PYZus{}school\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{fix\PYZus{}sb}
+        
+        \PY{n}{fix\PYZus{}bps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{n}{summary\PYZus{}school\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget per Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{summary\PYZus{}school\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget per Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{fix\PYZus{}bps}
+        \PY{n}{summary\PYZus{}school\PYZus{}df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}                            type  Students   budget  Budget per Student  \textbackslash{}
+        school\_name                                                              
+        Bailey High School     District      4976  3124928               628.0   
+        Cabrera High School     Charter      1858  1081356               582.0   
+        Figueroa High School   District      2949  1884411               639.0   
+        Ford High School       District      2739  1763916               644.0   
+        Griffin High School     Charter      1468   917500               625.0   
+        Hernandez High School  District      4635  3022020               652.0   
+        Holden High School      Charter       427   248087               581.0   
+        Huang High School      District      2917  1910635               655.0   
+        Johnson High School    District      4761  3094650               650.0   
+        Pena High School        Charter       962   585858               609.0   
+        Rodriguez High School  District      3999  2547363               637.0   
+        Shelton High School     Charter      1761  1056600               600.0   
+        Thomas High School      Charter      1635  1043130               638.0   
+        Wilson High School      Charter      2283  1319574               578.0   
+        Wright High School      Charter      1800  1049400               583.0   
+        
+                               Average Math Score  Average Reading Score  \textbackslash{}
+        school\_name                                                        
+        Bailey High School              77.048432              81.033963   
+        Cabrera High School             83.061895              83.975780   
+        Figueroa High School            76.711767              81.158020   
+        Ford High School                77.102592              80.746258   
+        Griffin High School             83.351499              83.816757   
+        Hernandez High School           77.289752              80.934412   
+        Holden High School              83.803279              83.814988   
+        Huang High School               76.629414              81.182722   
+        Johnson High School             77.072464              80.966394   
+        Pena High School                83.839917              84.044699   
+        Rodriguez High School           76.842711              80.744686   
+        Shelton High School             83.359455              83.725724   
+        Thomas High School              83.418349              83.848930   
+        Wilson High School              83.274201              83.989488   
+        Wright High School              83.682222              83.955000   
+        
+                               \% of passing Math  \% of passing reading  \textbackslash{}
+        school\_name                                                      
+        Bailey High School             64.630225             79.300643   
+        Cabrera High School            89.558665             93.864370   
+        Figueroa High School           63.750424             78.433367   
+        Ford High School               65.753925             77.510040   
+        Griffin High School            89.713896             93.392371   
+        Hernandez High School          64.746494             78.187702   
+        Holden High School             90.632319             92.740047   
+        Huang High School              63.318478             78.813850   
+        Johnson High School            63.852132             78.281874   
+        Pena High School               91.683992             92.203742   
+        Rodriguez High School          64.066017             77.744436   
+        Shelton High School            89.892107             92.617831   
+        Thomas High School             90.214067             92.905199   
+        Wilson High School             90.932983             93.254490   
+        Wright High School             90.277778             93.444444   
+        
+                               \% Overall Passing Rate  
+        school\_name                                    
+        Bailey High School                  71.965434  
+        Cabrera High School                 91.711518  
+        Figueroa High School                71.091896  
+        Ford High School                    71.631982  
+        Griffin High School                 91.553134  
+        Hernandez High School               71.467098  
+        Holden High School                  91.686183  
+        Huang High School                   71.066164  
+        Johnson High School                 71.067003  
+        Pena High School                    91.943867  
+        Rodriguez High School               70.905226  
+        Shelton High School                 91.254969  
+        Thomas High School                  91.559633  
+        Wilson High School                  92.093736  
+        Wright High School                  91.861111  
+\end{Verbatim}
+            
+    \subsection{Top Performing Schools (By Passing
+Rate)}\label{top-performing-schools-by-passing-rate}
+
+    \begin{itemize}
+\tightlist
+\item
+  Sort and display the top five schools in overall passing rate
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{summary\PYZus{}school\PYZus{}df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Overall Passing Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}                         type  Students   budget  Budget per Student  \textbackslash{}
+        school\_name                                                           
+        Wilson High School   Charter      2283  1319574               578.0   
+        Pena High School     Charter       962   585858               609.0   
+        Wright High School   Charter      1800  1049400               583.0   
+        Cabrera High School  Charter      1858  1081356               582.0   
+        Holden High School   Charter       427   248087               581.0   
+        
+                             Average Math Score  Average Reading Score  \textbackslash{}
+        school\_name                                                      
+        Wilson High School            83.274201              83.989488   
+        Pena High School              83.839917              84.044699   
+        Wright High School            83.682222              83.955000   
+        Cabrera High School           83.061895              83.975780   
+        Holden High School            83.803279              83.814988   
+        
+                             \% of passing Math  \% of passing reading  \textbackslash{}
+        school\_name                                                    
+        Wilson High School           90.932983             93.254490   
+        Pena High School             91.683992             92.203742   
+        Wright High School           90.277778             93.444444   
+        Cabrera High School          89.558665             93.864370   
+        Holden High School           90.632319             92.740047   
+        
+                             \% Overall Passing Rate  
+        school\_name                                  
+        Wilson High School                92.093736  
+        Pena High School                  91.943867  
+        Wright High School                91.861111  
+        Cabrera High School               91.711518  
+        Holden High School                91.686183  
+\end{Verbatim}
+            
+    \subsection{Bottom Performing Schools (By Passing
+Rate)}\label{bottom-performing-schools-by-passing-rate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{summary\PYZus{}school\PYZus{}df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Overall Passing Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}                            type  Students   budget  Budget per Student  \textbackslash{}
+        school\_name                                                              
+        Rodriguez High School  District      3999  2547363               637.0   
+        Huang High School      District      2917  1910635               655.0   
+        Johnson High School    District      4761  3094650               650.0   
+        Figueroa High School   District      2949  1884411               639.0   
+        Hernandez High School  District      4635  3022020               652.0   
+        
+                               Average Math Score  Average Reading Score  \textbackslash{}
+        school\_name                                                        
+        Rodriguez High School           76.842711              80.744686   
+        Huang High School               76.629414              81.182722   
+        Johnson High School             77.072464              80.966394   
+        Figueroa High School            76.711767              81.158020   
+        Hernandez High School           77.289752              80.934412   
+        
+                               \% of passing Math  \% of passing reading  \textbackslash{}
+        school\_name                                                      
+        Rodriguez High School          64.066017             77.744436   
+        Huang High School              63.318478             78.813850   
+        Johnson High School            63.852132             78.281874   
+        Figueroa High School           63.750424             78.433367   
+        Hernandez High School          64.746494             78.187702   
+        
+                               \% Overall Passing Rate  
+        school\_name                                    
+        Rodriguez High School               70.905226  
+        Huang High School                   71.066164  
+        Johnson High School                 71.067003  
+        Figueroa High School                71.091896  
+        Hernandez High School               71.467098  
+\end{Verbatim}
+            
+    \subsection{Math Scores by Grade}\label{math-scores-by-grade}
+
+    \begin{itemize}
+\item
+  Create a table that lists the average Reading Score for students of
+  each grade level (9th, 10th, 11th, 12th) at each school.
+\item
+  Create a pandas series for each grade. Hint: use a conditional
+  statement.
+\item
+  Group each series by school
+\item
+  Combine the series into a dataframe
+\item
+  Optional: give the displayed data cleaner formatting
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{group\PYZus{}school\PYZus{}grade\PYZus{}df} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+        \PY{n}{group\PYZus{}school\PYZus{}grade} \PY{o}{=} \PY{n}{group\PYZus{}school\PYZus{}grade\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{group\PYZus{}school\PYZus{}results} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{group\PYZus{}school\PYZus{}grade}\PY{p}{)}
+        \PY{n}{group\PYZus{}school\PYZus{}results} \PY{o}{=} \PY{n}{group\PYZus{}school\PYZus{}results}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Math Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                             \PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{group\PYZus{}school\PYZus{}results}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}                              Average Math Score
+        school\_name           grade                    
+        Bailey High School    10th            76.996772
+                              11th            77.515588
+                              12th            76.492218
+                              9th             77.083676
+        Cabrera High School   10th            83.154506
+                              11th            82.765560
+                              12th            83.277487
+                              9th             83.094697
+        Figueroa High School  10th            76.539974
+                              11th            76.884344
+                              12th            77.151369
+                              9th             76.403037
+        Ford High School      10th            77.672316
+                              11th            76.918058
+                              12th            76.179963
+                              9th             77.361345
+        Griffin High School   10th            84.229064
+                              11th            83.842105
+                              12th            83.356164
+                              9th             82.044010
+        Hernandez High School 10th            77.337408
+                              11th            77.136029
+                              12th            77.186567
+                              9th             77.438495
+        Holden High School    10th            83.429825
+                              11th            85.000000
+                              12th            82.855422
+                              9th             83.787402
+        Huang High School     10th            75.908735
+                              11th            76.446602
+                              12th            77.225641
+                              9th             77.027251
+        Johnson High School   10th            76.691117
+                              11th            77.491653
+                              12th            76.863248
+                              9th             77.187857
+        Pena High School      10th            83.372000
+                              11th            84.328125
+                              12th            84.121547
+                              9th             83.625455
+        Rodriguez High School 10th            76.612500
+                              11th            76.395626
+                              12th            77.690748
+                              9th             76.859966
+        Shelton High School   10th            82.917411
+                              11th            83.383495
+                              12th            83.778976
+                              9th             83.420755
+        Thomas High School    10th            83.087886
+                              11th            83.498795
+                              12th            83.497041
+                              9th             83.590022
+        Wilson High School    10th            83.724422
+                              11th            83.195326
+                              12th            83.035794
+                              9th             83.085578
+        Wright High School    10th            84.010288
+                              11th            83.836782
+                              12th            83.644986
+                              9th             83.264706
+\end{Verbatim}
+            
+    \subsection{Reading Score by Grade}\label{reading-score-by-grade}
+
+    \begin{itemize}
+\tightlist
+\item
+  Perform the same operations as above for reading scores
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{group\PYZus{}school\PYZus{}grade\PYZus{}df} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+        \PY{n}{group\PYZus{}school\PYZus{}grade} \PY{o}{=} \PY{n}{group\PYZus{}school\PYZus{}grade\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{n}{group\PYZus{}school\PYZus{}results} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{group\PYZus{}school\PYZus{}grade}\PY{p}{)}
+        \PY{n}{group\PYZus{}school\PYZus{}results} \PY{o}{=} \PY{n}{group\PYZus{}school\PYZus{}results}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Reading Score}\PY{l+s+s1}{\PYZsq{}}
+                                                             \PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{group\PYZus{}school\PYZus{}results}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}                              Average Reading Score
+        school\_name           grade                       
+        Bailey High School    10th               80.907183
+                              11th               80.945643
+                              12th               80.912451
+                              9th                81.303155
+        Cabrera High School   10th               84.253219
+                              11th               83.788382
+                              12th               84.287958
+                              9th                83.676136
+        Figueroa High School  10th               81.408912
+                              11th               80.640339
+                              12th               81.384863
+                              9th                81.198598
+        Ford High School      10th               81.262712
+                              11th               80.403642
+                              12th               80.662338
+                              9th                80.632653
+        Griffin High School   10th               83.706897
+                              11th               84.288089
+                              12th               84.013699
+                              9th                83.369193
+        Hernandez High School 10th               80.660147
+                              11th               81.396140
+                              12th               80.857143
+                              9th                80.866860
+        Holden High School    10th               83.324561
+                              11th               83.815534
+                              12th               84.698795
+                              9th                83.677165
+        Huang High School     10th               81.512386
+                              11th               81.417476
+                              12th               80.305983
+                              9th                81.290284
+        Johnson High School   10th               80.773431
+                              11th               80.616027
+                              12th               81.227564
+                              9th                81.260714
+        Pena High School      10th               83.612000
+                              11th               84.335938
+                              12th               84.591160
+                              9th                83.807273
+        Rodriguez High School 10th               80.629808
+                              11th               80.864811
+                              12th               80.376426
+                              9th                80.993127
+        Shelton High School   10th               83.441964
+                              11th               84.373786
+                              12th               82.781671
+                              9th                84.122642
+        Thomas High School    10th               84.254157
+                              11th               83.585542
+                              12th               83.831361
+                              9th                83.728850
+        Wilson High School    10th               84.021452
+                              11th               83.764608
+                              12th               84.317673
+                              9th                83.939778
+        Wright High School    10th               83.812757
+                              11th               84.156322
+                              12th               84.073171
+                              9th                83.833333
+\end{Verbatim}
+            
+    \subsection{Scores by School Spending}\label{scores-by-school-spending}
+
+    \begin{itemize}
+\tightlist
+\item
+  Create a table that breaks down school performances based on average
+  Spending Ranges (Per Student). Use 4 reasonable bins to group school
+  spending. Include in the table each of the following:
+\item
+  Average Math Score
+\item
+  Average Reading Score
+\item
+  \% Passing Math
+\item
+  \% Passing Reading
+\item
+  Overall Passing Rate (Average of the above two)
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Sample bins. Feel free to create your own bins.}
+        \PY{n}{spending\PYZus{}bins} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{585}\PY{p}{,} \PY{l+m+mi}{615}\PY{p}{,} \PY{l+m+mi}{645}\PY{p}{,} \PY{l+m+mi}{675}\PY{p}{]}
+        \PY{n}{group\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}\PYZdl{}585}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}585\PYZhy{}615}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}615\PYZhy{}645}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}645\PYZhy{}675}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+        \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                                             \PY{n}{spending\PYZus{}bins}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{group\PYZus{}names}\PY{p}{)}
+        
+        
+        \PY{n}{by\PYZus{}spending} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{avg\PYZus{}math} \PY{o}{=} \PY{n}{by\PYZus{}spending}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{avg\PYZus{}read} \PY{o}{=} \PY{n}{by\PYZus{}spending}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{n}{pass\PYZus{}math} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{70}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{by\PYZus{}spending}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{pass\PYZus{}read} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{70}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{by\PYZus{}spending}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        
+        
+        \PY{n}{overall} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{p}{(}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{70}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{70}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{by\PYZus{}spending}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{n}{scores\PYZus{}by\PYZus{}spend} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Math Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{avg\PYZus{}math}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Reading Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{avg\PYZus{}read}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pass\PYZus{}math}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pass\PYZus{}read}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Overall Passing Rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{overall}
+        \PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{scores\PYZus{}by\PYZus{}spend} \PY{o}{=} \PY{n}{scores\PYZus{}by\PYZus{}spend}\PY{p}{[}\PY{p}{[}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Math Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Reading Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Overall Passing Rate}\PY{l+s+s2}{\PYZdq{}}
+        \PY{p}{]}\PY{p}{]}
+        
+        \PY{n}{scores\PYZus{}by\PYZus{}spend}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Per Student Budget}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{scores\PYZus{}by\PYZus{}spend} \PY{o}{=} \PY{n}{scores\PYZus{}by\PYZus{}spend}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{group\PYZus{}names}\PY{p}{)}
+        
+        \PY{n}{scores\PYZus{}by\PYZus{}spend}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Math Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Reading Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1\PYZpc{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1\PYZpc{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Overall Passing Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1\PYZpc{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} <pandas.io.formats.style.Styler at 0x1f0c896c400>
+\end{Verbatim}
+            
+    \subsection{Scores by School Size}\label{scores-by-school-size}
+
+    \begin{itemize}
+\tightlist
+\item
+  Perform the same operations as above, based on school size.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Sample bins. Feel free to create your own bins.}
+        \PY{n}{size\PYZus{}bins} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{]}
+        \PY{n}{groupnames} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Small (\PYZlt{}1000)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Medium (1000\PYZhy{}2000)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Large (2000\PYZhy{}5000)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+        \PY{n}{bins} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{999}\PY{p}{,} \PY{l+m+mi}{1999}\PY{p}{,} \PY{l+m+mi}{99999999999}\PY{p}{]}
+        \PY{n}{group\PYZus{}name} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Small (\PYZlt{}1000)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Medium (1000\PYZhy{}2000)}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Large (\PYZgt{}2000)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size\PYZus{}bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{groupnames}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}group by spending}
+        \PY{n}{by\PYZus{}size} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size\PYZus{}bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}calculations }
+        \PY{n}{avg\PYZus{}math} \PY{o}{=} \PY{n}{by\PYZus{}size}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{avg\PYZus{}read} \PY{o}{=} \PY{n}{by\PYZus{}size}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{pass\PYZus{}math} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{70}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size\PYZus{}bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{by\PYZus{}size}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        \PY{n}{pass\PYZus{}read} \PY{o}{=}  \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{70}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size\PYZus{}bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{by\PYZus{}size}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        \PY{n}{overall} \PY{o}{=} \PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{p}{(}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reading\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{70}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{school\PYZus{}data\PYZus{}complete}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{math\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{70}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size\PYZus{}bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{by\PYZus{}size}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+                    
+        \PY{c+c1}{\PYZsh{} df build            }
+        \PY{n}{scores\PYZus{}by\PYZus{}size} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Math Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{avg\PYZus{}math}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Reading Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{avg\PYZus{}read}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pass\PYZus{}math}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pass\PYZus{}read}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Overall Passing Rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{overall}
+                    
+        \PY{p}{\PYZcb{}}\PY{p}{)}
+                    
+        \PY{c+c1}{\PYZsh{}reorder columns}
+        \PY{n}{scores\PYZus{}by\PYZus{}size} \PY{o}{=} \PY{n}{scores\PYZus{}by\PYZus{}size}\PY{p}{[}\PY{p}{[}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Math Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Reading Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Overall Passing Rate}\PY{l+s+s2}{\PYZdq{}}
+        \PY{p}{]}\PY{p}{]}
+        
+        \PY{n}{scores\PYZus{}by\PYZus{}size}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Students}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{scores\PYZus{}by\PYZus{}size} \PY{o}{=} \PY{n}{scores\PYZus{}by\PYZus{}size}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{groupnames}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}formating}
+        \PY{n}{scores\PYZus{}by\PYZus{}size}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Math Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Reading Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1\PYZpc{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Passing Reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1\PYZpc{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Overall Passing Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.1\PYZpc{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} <pandas.io.formats.style.Styler at 0x1f0c89cbe48>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    \subsection{Scores by School Type}\label{scores-by-school-type}
+
+    \begin{itemize}
+\tightlist
+\item
+  Perform the same operations as above, based on school type.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{scores\PYZus{}schooltype\PYZus{}df} \PY{o}{=} \PY{n}{summary\PYZus{}school\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Math Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Reading Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n}{scores\PYZus{}schooltype\PYZus{}grouped} \PY{o}{=} \PY{n}{scores\PYZus{}schooltype\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Math Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Reading Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{scores\PYZus{}schooltype\PYZus{}grouped}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f Overall Passing Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{scores\PYZus{}schooltype\PYZus{}grouped}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing Math}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PYZbs{}
+                                                                \PY{n}{scores\PYZus{}schooltype\PYZus{}grouped}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f passing reading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}
+         
+         \PY{n}{scores\PYZus{}schooltype\PYZus{}grouped}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}           Average Math Score  Average Reading Score  \% of passing Math  \textbackslash{}
+         type                                                                     
+         Charter            83.473852              83.896421          90.363226   
+         District           76.956733              80.966636          64.302528   
+         
+                   \% of passing reading  \% of Overall Passing Rate  
+         type                                                       
+         Charter              93.052812                  91.708019  
+         District             78.324559                  71.313543  
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
